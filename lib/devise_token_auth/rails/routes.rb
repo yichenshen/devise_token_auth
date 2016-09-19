@@ -17,7 +17,8 @@ module ActionDispatch::Routing
       controllers = {:sessions           => sessions_ctrl,
                      :registrations      => registrations_ctrl,
                      :passwords          => passwords_ctrl,
-                     :confirmations      => confirmations_ctrl}
+                     :confirmations      => confirmations_ctrl,
+                     :omniauth_callbacks => omniauth_ctrl}
 
       # remove any unwanted devise modules
       opts[:skip].each{|item| controllers.delete(item)}
@@ -27,7 +28,7 @@ module ActionDispatch::Routing
         :module      => :devise,
         :path        => "#{opts[:at]}",
         :controllers => controllers,
-        :skip        => opts[:skip] + [:omniauth_callbacks]
+        :skip        => opts[:skip]
 
       unnest_namespace do
         # get full url path as if it were namespaced
